@@ -60,7 +60,7 @@ Examples:
                 print("Errors detected:")
                 print(output)
             else:
-                print("Command completed successfully. Full output saved to database.")
+                print("Command completed successfully. Run 'output' to show results.")
 
         except FileNotFoundError:
             print("Error: salt command not found. Is Salt installed?")

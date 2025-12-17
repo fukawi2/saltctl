@@ -30,11 +30,11 @@ Selected 3 host(s):
 
 saltctl [3 host(s)]> push test
 Running: sudo salt --list web01,web02,web03 state.test
-Command completed successfully. Full output saved to database.
+Command completed successfully. Run 'output' to show results.
 
 saltctl [3 host(s)]> push apply
 Running: sudo salt --list web01,web02,web03 state.apply
-Command completed successfully. Full output saved to database.
+Command completed successfully. Run 'output' to show results.
 ```
 
 ## Configuration
