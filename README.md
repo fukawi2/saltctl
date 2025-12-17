@@ -114,3 +114,26 @@ The shell maintains persistent command history in `~/.saltctl_history` with read
 - Up/down arrow navigation through previous commands
 - Ctrl-R for reverse history search
 - Tab completion for command names
+
+## Development
+
+### Running Tests
+
+Install test dependencies:
+
+```bash
+pip install pytest pytest-cov
+pip install -e .
+```
+
+Run tests:
+
+```bash
+pytest
+```
+
+Run tests with coverage:
+
+```bash
+pytest --cov=. --cov-report=html
+```
