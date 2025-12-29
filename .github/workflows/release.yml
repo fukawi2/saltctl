@@ -41,7 +41,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes dh-python debhelper
+          sudo apt-get install --yes build-essential python3-all dh-python debhelper
 
       - name: Install Python dependencies
         run: |
