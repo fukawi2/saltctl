@@ -71,7 +71,9 @@ jobs:
             --python-package-name-prefix python3 \
             --python-bin python3 \
             --python-pip pip3 \
-            setup.py
+            --python-install-lib /usr/lib/python3/dist-packages \
+            --python-install-bin /usr/bin \
+            .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
