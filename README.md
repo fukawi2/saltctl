@@ -66,7 +66,7 @@ trim_days = 90
 Download the latest `.deb` package from the [Releases](https://github.com/fukawi2/saltctl/releases) page and install:
 
 ```bash
-sudo dpkg -i python3-saltctl_*.deb
+sudo dpkg -i saltctl_*.deb
 ```
 
 The `saltctl` command will be available system-wide.

@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version number to build (without v prefix)'
+        required: true
+        default: '0.0.1-test'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Extract version from tag or input
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Building version: ${VERSION}"
+
+      # Install fpm (Effing Package Management) for building .deb packages
+      # fpm is written in Ruby and distributed as a Ruby gem, so we need Ruby/RubyGems
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ruby ruby-dev rubygems build-essential
+          sudo gem install --no-document fpm
+
+      - name: Install Python package
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Build .deb package
+        run: |
+          fpm \
+            --input-type python \
+            --output-type deb \
+            --name saltctl \
+            --version ${{ steps.version.outputs.version }} \
+            --architecture all \
+            --depends python3 \
+            --maintainer "Phillip Smith <fukawi2@gmail.com>" \
+            --description "Interactive shell for managing Salt minions" \
+            --url "https://github.com/fukawi2/saltctl" \
+            --license MIT \
+            --python-package-name-prefix python3 \
+            --python-bin python3 \
+            --python-pip pip3 \
+            setup.py
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            *.deb
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', steps.version.outputs.version) || github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# vim: set ts=2 sw=2 et:
