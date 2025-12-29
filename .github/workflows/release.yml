@@ -41,12 +41,12 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes python3-stdeb dh-python debhelper
+          sudo apt-get install --yes dh-python debhelper
 
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install setuptools wheel
+          pip install setuptools wheel stdeb
 
       # Build .deb package using stdeb
       # Note: We deliberately do not add Salt as a package dependency because Salt
