@@ -57,8 +57,22 @@ jobs:
       # can be installed in various ways (apt, pip, source) with different package names
       - name: Build .deb package
         run: |
+          # Create staging directory structure
+          mkdir -p package-staging/usr/lib/python3/dist-packages
+          mkdir -p package-staging/usr/bin
+
+          # Install Python package to staging directory
+          pip install --target=package-staging/usr/lib/python3/dist-packages --no-compile .
+
+          # Move console scripts from dist-packages to bin
+          if [ -d package-staging/usr/lib/python3/dist-packages/bin ]; then
+            mv package-staging/usr/lib/python3/dist-packages/bin/* package-staging/usr/bin/
+            rmdir package-staging/usr/lib/python3/dist-packages/bin
+          fi
+
+          # Build .deb from staged files
           fpm \
-            --input-type python \
+            --input-type dir \
             --output-type deb \
             --name saltctl \
             --version ${{ steps.version.outputs.version }} \
@@ -68,11 +82,7 @@ jobs:
             --description "Interactive shell for managing Salt minions" \
             --url "https://github.com/fukawi2/saltctl" \
             --license MIT \
-            --python-package-name-prefix python3 \
-            --python-bin python3 \
-            --python-pip pip3 \
-            --python-install-lib /usr/lib/python3/dist-packages \
-            --python-install-bin /usr/bin \
+            --chdir package-staging \
             .
 
       - name: Create GitHub Release
