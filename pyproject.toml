@@ -28,7 +28,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/fukawi2/saltctl"
+Homepage = "https://saltctl.xyz"
 Repository = "https://github.com/fukawi2/saltctl"
 
 [project.scripts]
