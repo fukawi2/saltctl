@@ -72,6 +72,7 @@ jobs:
             --input-type python \
             --output-type deb \
             --name saltctl \
+            --prefix /usr \
             --python-bin python3 \
             --python-pip pip3 \
             --python-install-lib /usr/lib/python3/dist-packages \
