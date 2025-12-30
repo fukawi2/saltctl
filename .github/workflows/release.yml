@@ -74,6 +74,8 @@ jobs:
             --name saltctl \
             --python-bin python3 \
             --python-pip pip3 \
+            --python-install-lib /usr/lib/python3/dist-packages \
+            --python-install-bin /usr/bin \
             --depends python3 \
             dist/*.whl
 
