@@ -71,7 +71,7 @@ jobs:
           fpm \
             --input-type python \
             --output-type deb \
-            --python-package-name-prefix python3 \
+            --name saltctl \
             --python-bin python3 \
             --python-pip pip3 \
             --depends python3 \
