@@ -64,20 +64,28 @@ jobs:
           # Update version in pyproject.toml
           sed -i "s/version = \"0.0.0\"/version = \"${VERSION}\"/" pyproject.toml
 
-          # Build Python wheel
-          python -m build --wheel
+          # Install build package for system Python
+          /usr/bin/python3 -m pip install --user build
 
-          # Convert wheel to .deb using fpm
+          # Build Python wheel using system Python (not GitHub Actions Python)
+          /usr/bin/python3 -m build --wheel
+
+          # Convert wheel to .deb using fpm with system Python paths
           fpm \
             --input-type python \
             --output-type deb \
             --name saltctl \
-            --prefix /usr \
-            --python-bin python3 \
-            --python-pip pip3 \
+            --version ${VERSION} \
+            --architecture all \
+            --python-bin /usr/bin/python3 \
+            --python-pip /usr/bin/pip3 \
             --python-install-lib /usr/lib/python3/dist-packages \
             --python-install-bin /usr/bin \
             --depends python3 \
+            --maintainer "Phillip Smith <fukawi2@gmail.com>" \
+            --description "Interactive shell for managing Salt minions" \
+            --url "https://github.com/fukawi2/saltctl" \
+            --license MIT \
             dist/*.whl
 
       - name: Create GitHub Release
