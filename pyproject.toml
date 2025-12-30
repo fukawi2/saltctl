@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "saltctl"
+version = "0.0.0"  # Overridden by git tag during release
+description = "Interactive shell for managing Salt minions"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Phillip Smith", email = "fukawi2@gmail.com"}
+]
+requires-python = ">=3.6"
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: System :: Systems Administration",
+]
+
+[project.urls]
+Homepage = "https://github.com/fukawi2/saltctl"
+Repository = "https://github.com/fukawi2/saltctl"
+
+[project.scripts]
+saltctl = "saltctl:main"
+
+[tool.setuptools]
+py-modules = ["saltctl", "database", "config"]
+
+[tool.setuptools.packages.find]
+include = ["commands*", "tests*"]
+
+# vim: set ts=2 sw=2 et:
