@@ -152,7 +152,7 @@ class SaltCtlShell:
             command_id = self.db.log_command(
                 self.username,
                 self.selected_hosts,
-                line,
+                cmdLine,
                 0.0  # Duration will be updated after execution
             )
             self.last_command_id = command_id
@@ -175,8 +175,8 @@ class SaltCtlShell:
         try:
             while self.running:
                 try:
-                    line = input(self.prompt)
-                    should_exit = self.run_command(line)
+                    cmdLine = input(self.prompt)
+                    should_exit = self.run_command(cmdLine)
                     if should_exit:
                         break
                 except EOFError:
