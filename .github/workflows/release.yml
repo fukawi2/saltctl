@@ -70,10 +70,6 @@ jobs:
           # Build Python wheel using system Python (not GitHub Actions Python)
           /usr/bin/python3 -m build --wheel
 
-          # Stage config file for packaging
-          mkdir -p staging/etc
-          cp saltctl.conf.default staging/etc/saltctl.conf
-
           # Convert wheel to .deb using fpm with system Python paths
           fpm \
             --input-type python \
@@ -92,7 +88,7 @@ jobs:
             --url "https://github.com/fukawi2/saltctl" \
             --license MIT \
             --config-files /etc/saltctl.conf \
-            --directories staging/=/  \
+            --deb-config saltctl.conf.default=/etc/saltctl.conf \
             dist/*.whl
 
       - name: Create GitHub Release
