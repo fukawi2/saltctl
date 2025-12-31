@@ -4,15 +4,10 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version number to build (without v prefix)'
-        required: true
-        default: '0.0.1-test'
 
 jobs:
   release:
+    name: "Release ${{ github.ref_name }}"
     runs-on: ubuntu-latest
 
     permissions:
@@ -27,14 +22,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Extract version from tag or input
+      - name: Extract version from tag
         id: version
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            VERSION="${{ github.event.inputs.version }}"
-          else
-            VERSION=${GITHUB_REF#refs/tags/v}
-          fi
+          VERSION=${GITHUB_REF#refs/tags/v}
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
           echo "Building version: ${VERSION}"
 
@@ -106,7 +97,7 @@ jobs:
         with:
           files: |
             *.deb
-          tag_name: ${{ github.event_name == 'workflow_dispatch' && format('v{0}', steps.version.outputs.version) || github.ref_name }}
+          tag_name: ${{ github.ref_name }}
           draft: false
           prerelease: false
           generate_release_notes: true
