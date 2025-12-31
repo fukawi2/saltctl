@@ -108,7 +108,7 @@ class SaltCtlShell:
         Returns:
             True to exit the shell, False to continue
         """
-        cmdLine = line.strip()
+        cmdLine = cmdLine.strip()
         if not cmdLine:
             return False
 
