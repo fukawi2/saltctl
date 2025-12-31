@@ -70,26 +70,32 @@ jobs:
           # Build Python wheel using system Python (not GitHub Actions Python)
           /usr/bin/python3 -m build --wheel
 
-          # Convert wheel to .deb using fpm with system Python paths
+          # Stage files for packaging
+          mkdir -p staging/usr/lib/python3/dist-packages
+          mkdir -p staging/usr/bin
+          mkdir -p staging/etc
+
+          # Install wheel to staging using system pip (creates correct shebangs)
+          /usr/bin/pip3 install --target=staging/usr/lib/python3/dist-packages --no-compile --no-deps dist/*.whl
+
+          # Add config file
+          cp saltctl.conf.default staging/etc/saltctl.conf
+
+          # Build .deb from staged files
           fpm \
-            --input-type python \
+            --input-type dir \
             --output-type deb \
             --name saltctl \
             --version ${VERSION} \
             --architecture all \
-            --prefix /usr \
-            --python-bin /usr/bin/python3 \
-            --python-pip /usr/bin/pip3 \
-            --python-install-lib /usr/lib/python3/dist-packages \
-            --python-install-bin /usr/bin \
             --depends python3 \
             --maintainer "Phillip Smith <fukawi2@gmail.com>" \
             --description "Interactive shell for managing Salt minions" \
             --url "https://github.com/fukawi2/saltctl" \
             --license MIT \
             --config-files /etc/saltctl.conf \
-            --deb-config saltctl.conf.default=/etc/saltctl.conf \
-            dist/*.whl
+            --chdir staging \
+            .
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
