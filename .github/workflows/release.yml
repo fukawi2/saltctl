@@ -81,6 +81,7 @@ jobs:
             --name saltctl \
             --version ${VERSION} \
             --architecture all \
+            --prefix /usr \
             --python-bin /usr/bin/python3 \
             --python-pip /usr/bin/pip3 \
             --python-install-lib /usr/lib/python3/dist-packages \
@@ -91,6 +92,7 @@ jobs:
             --url "https://github.com/fukawi2/saltctl" \
             --license MIT \
             --config-files /etc/saltctl.conf \
+            --directories staging/=/  \
             dist/*.whl
 
       - name: Create GitHub Release
