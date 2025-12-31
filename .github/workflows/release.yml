@@ -78,6 +78,10 @@ jobs:
           # Install wheel to staging using system pip (creates correct shebangs)
           /usr/bin/pip3 install --target=staging/usr/lib/python3/dist-packages --no-compile --no-deps dist/*.whl
 
+          # Move console script from dist-packages to /usr/bin
+          mv staging/usr/lib/python3/dist-packages/bin/saltctl staging/usr/bin/
+          rmdir staging/usr/lib/python3/dist-packages/bin
+
           # Add config file
           cp saltctl.conf.default staging/etc/saltctl.conf
 
