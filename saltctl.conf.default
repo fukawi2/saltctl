@@ -1,0 +1,10 @@
+[salt]
+# Use `sudo` when running salt commands.
+# Set to `true` unless your user has permission to execute salt commands without sudo.
+use_sudo = true
+
+[history]
+# Number of days to keep in command history before the 'history trim' command will delete entries (default: 90)
+trim_days = 90
+
+# vim: set ts=2 sw=2 et:
