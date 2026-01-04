@@ -27,6 +27,7 @@ class SaltCtlShell:
         self.last_command_id = None
         self.readline_history_file = os.path.expanduser("~/.saltctl_history")
         self._setup_readline()
+        print("Loading minion list...")
         self.refresh_minions()
         self.update_prompt()
 
