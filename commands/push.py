@@ -37,7 +37,7 @@ Examples:
 
         # Build salt command
         target = shell.build_target_list()
-        salt_cmd = shell.build_salt_cmd("salt", "--list", target, f"state.{action}")
+        salt_cmd = shell.build_salt_cmd("salt", "--list", target, "--state-output=changes", f"state.{action}")
         print(f"Running: {' '.join(salt_cmd)}")
         try:
             result = subprocess.run(
