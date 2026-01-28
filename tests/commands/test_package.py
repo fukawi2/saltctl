@@ -149,8 +149,7 @@ def test_package_builds_correct_command_for_install(mock_shell, mock_subprocess)
     assert '--list' in executed_cmd
     assert 'host1,host2' in executed_cmd
     assert 'pkg.install' in executed_cmd
-    assert 'nginx' in executed_cmd
-    assert 'redis' in executed_cmd
+    assert 'nginx redis' in executed_cmd
 
 
 def test_package_builds_correct_command_for_reinstall(mock_shell, mock_subprocess):
