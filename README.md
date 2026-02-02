@@ -5,7 +5,7 @@ Interactive shell for managing Salt minions with command history logging and out
 ## Features
 
 - **Interactive shell** with readline support (command history, tab completion)
-- **Host selection** with wildcard pattern matching
+- **Host selection** with partial pattern matching (wildcards added automatically)
 - **Salt operations** - Test and Apply your Salt states
 - **Command history** - all actions logged to SQLite database
 - **Salt output archive** - full salt command output stored in database for later review/audit
@@ -22,7 +22,7 @@ $ ./saltctl.py
 SaltCtl - Salt Minion Management
 Type 'help' for available commands.
 
-saltctl> select web*
+saltctl> select web
 Selected 3 host(s):
   - web01
   - web02
@@ -87,7 +87,7 @@ Or run directly from the repository:
 
 ## Available Commands
 
-- **select** `[pattern...]` - Select hosts with wildcard support (e.g., `select fw*`, `select web1 web2`)
+- **select** `[pattern...]` - Select hosts with partial matching (e.g., `select fw`, `select web1 web2`). Use explicit wildcards for prefix/suffix matching (e.g., `fw*`, `*.nyc`)
 - **push** `[test|apply]` - Run salt `state.test` or `state.apply` on selected hosts
 - **list** - Show all available minions
 - **status** - Show currently selected hosts
