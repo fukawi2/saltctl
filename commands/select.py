@@ -13,12 +13,13 @@ class SelectCommand(BaseCommand):
 
     @property
     def help_text(self) -> str:
-        return """Select hosts to operate on. Supports wildcards.
+        return """Select hosts to operate on. Patterns match partial names by default.
 Usage: select [pattern1] [pattern2] ...
 Examples:
-    select fw*         - Select all hosts starting with 'fw'
-    select web1 web2   - Select specific hosts
-    select *.nyc       - Select all hosts ending with '.nyc'
+    select fw          - Select all hosts containing 'fw'
+    select web1 web2   - Select hosts containing 'web1' or 'web2'
+    select fw*         - Select all hosts starting with 'fw' (explicit wildcard)
+    select *.nyc       - Select all hosts ending with '.nyc' (explicit wildcard)
     select             - Clear selection"""
 
     @property
@@ -52,7 +53,10 @@ Examples:
         return False
 
     def _match_hosts(self, shell, pattern: str):
-        """Match hosts using wildcard pattern"""
+        """Match hosts using wildcard pattern. Auto-adds wildcards for partial matching."""
+        # If pattern doesn't contain wildcards, wrap it for partial matching
+        if '*' not in pattern and '?' not in pattern:
+            pattern = f'*{pattern}*'
         return [host for host in shell.all_minions if fnmatch.fnmatch(host, pattern)]
 
 

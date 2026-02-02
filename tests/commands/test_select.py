@@ -17,7 +17,7 @@ def test_select_not_logged():
 
 
 def test_select_single_host(mock_shell):
-    """Test selecting a single host"""
+    """Test selecting a single host with partial match"""
     cmd = SelectCommand()
     mock_shell.all_minions = ['host1', 'host2', 'host3']
 
@@ -27,13 +27,34 @@ def test_select_single_host(mock_shell):
     mock_shell.update_prompt.assert_called_once()
 
 
-def test_select_wildcard(mock_shell):
-    """Test selecting hosts with wildcard pattern"""
+def test_select_partial_match(mock_shell):
+    """Test selecting hosts with partial match (no wildcards)"""
     cmd = SelectCommand()
-    mock_shell.all_minions = ['web1', 'web2', 'db1', 'db2']
+    mock_shell.all_minions = ['web-server1', 'web-server2', 'db-server1', 'db-server2']
+
+    cmd.execute(mock_shell, 'web')
+
+    assert set(mock_shell.selected_hosts) == {'web-server1', 'web-server2'}
+
+
+def test_select_partial_match_middle(mock_shell):
+    """Test selecting hosts where pattern matches middle of hostname"""
+    cmd = SelectCommand()
+    mock_shell.all_minions = ['prod-web-01', 'prod-db-01', 'test-web-01']
+
+    cmd.execute(mock_shell, 'web')
+
+    assert set(mock_shell.selected_hosts) == {'prod-web-01', 'test-web-01'}
+
+
+def test_select_wildcard(mock_shell):
+    """Test selecting hosts with explicit wildcard pattern"""
+    cmd = SelectCommand()
+    mock_shell.all_minions = ['web1', 'web2', 'db1', 'db2', 'myweb']
 
     cmd.execute(mock_shell, 'web*')
 
+    # Explicit wildcard should only match hosts starting with 'web'
     assert set(mock_shell.selected_hosts) == {'web1', 'web2'}
 
 
