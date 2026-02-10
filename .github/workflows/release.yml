@@ -135,15 +135,24 @@ jobs:
         run: |
           mkdir -p pool/main
           mkdir -p dists/stable/main/binary-all
+          mkdir -p dists/stable/main/binary-amd64
+          mkdir -p dists/stable/main/binary-arm64
 
       - name: Copy .deb package to repository
         run: |
           cp /tmp/saltctl.deb pool/main/
 
-      - name: Generate Packages file
+      - name: Generate Packages files
         run: |
+          # Generate Packages file
           dpkg-scanpackages --multiversion pool/main > dists/stable/main/binary-all/Packages
           gzip --keep --force dists/stable/main/binary-all/Packages
+
+          # Copy to other architecture directories (since packages are arch: all)
+          for arch in amd64 arm64; do
+            cp dists/stable/main/binary-all/Packages dists/stable/main/binary-$arch/
+            cp dists/stable/main/binary-all/Packages.gz dists/stable/main/binary-$arch/
+          done
 
       - name: Generate Release file
         run: |
@@ -152,7 +161,7 @@ jobs:
           Origin: saltctl
           Label: saltctl
           Codename: stable
-          Architectures: all
+          Architectures: all amd64 arm64
           Components: main
           Description: saltctl APT repository
           Date: $(date -Ru)
