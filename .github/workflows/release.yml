@@ -117,6 +117,9 @@ jobs:
 
       - name: Checkout gh-pages branch
         run: |
+          # Discard any changes from build step (e.g., pyproject.toml version update)
+          git reset --hard HEAD
+
           git fetch origin
           if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
             # Remote branch exists - check it out
