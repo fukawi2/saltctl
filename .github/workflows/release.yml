@@ -118,7 +118,7 @@ jobs:
       - name: Checkout gh-pages branch
         run: |
           git fetch origin gh-pages || true
-          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+          git checkout gh-pages 2>/dev/null || git checkout -b gh-pages origin/gh-pages 2>/dev/null || git checkout --orphan gh-pages
 
           # Clean working directory if this is a new orphan branch
           if [ -z "$(git log --oneline -1 2>/dev/null)" ]; then
