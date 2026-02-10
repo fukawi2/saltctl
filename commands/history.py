@@ -36,13 +36,17 @@ Usage: history [full|trim]
         show_all = arg == "full" or not shell.selected_hosts
         if show_all:
             rows = shell.db.get_command_history(selected_hosts=None, limit=50)
-            print("Command history (last 50):")
+            header = "Command history (last 50):"
         else:
             rows = shell.db.get_command_history(selected_hosts=shell.selected_hosts, limit=50)
-            print(f"Command history for selected hosts (last 50):")
+            header = f"Command history for selected hosts (last 50):"
+
         if not rows:
             print("  No history found.")
             return False
+
+        # Build output
+        lines = [header]
 
         # Display results in chronological order (oldest to newest)
         for row in reversed(rows):
@@ -64,8 +68,11 @@ Usage: history [full|trim]
             else:
                 hosts_str = "(none)"
 
-            print(f"\n[ID: {cmd_id}] [{ts}] {username} ({duration_str}) - Hosts: {hosts_str}")
-            print(f"  Command: {command}")
+            lines.append(f"\n[ID: {cmd_id}] [{ts}] {username} ({duration_str}) - Hosts: {hosts_str}")
+            lines.append(f"  Command: {command}")
+
+        content = '\n'.join(lines)
+        self._display_with_pager(content)
 
         return False
 

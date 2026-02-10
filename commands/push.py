@@ -1,5 +1,6 @@
 """Push command - run salt test or apply on selected hosts"""
 
+import shutil
 import subprocess
 from .base import BaseCommand
 
@@ -57,8 +58,19 @@ Examples:
 
             # Only show errors to user
             if result.returncode != 0:
-                print("Errors detected:")
-                print(output)
+                # Get terminal width for separator line
+                terminal_width = shutil.get_terminal_size(fallback=(80, 24)).columns
+
+                # Format error output
+                content = f"""Errors detected
+Return code: {result.returncode}
+
+{'='*terminal_width}
+{output}
+{'='*terminal_width}
+"""
+                # Display through pager
+                self._display_with_pager(content)
             else:
                 print("Command completed successfully. Run 'output' to show results.")
 

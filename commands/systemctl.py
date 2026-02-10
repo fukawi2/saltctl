@@ -52,9 +52,13 @@ Examples:
                 text=True
             )
             output = result.stdout + result.stderr
-            print(output)
+
             if result.returncode != 0:
-                print(f"\nCommand failed with exit code {result.returncode}")
+                content = f"{output}\n\nCommand failed with exit code {result.returncode}"
+            else:
+                content = output
+
+            self._display_with_pager(content)
 
         except FileNotFoundError:
             print("Error: salt command not found. Is Salt installed?")
