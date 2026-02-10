@@ -1,0 +1,16 @@
+Origin: saltctl
+Label: saltctl
+Codename: stable
+Architectures: all
+Components: main
+Description: saltctl APT repository
+Date: Tue, 10 Feb 2026 02:28:44 +0000
+MD5Sum:
+7b84ce34d35d82b97e2ccd708347defa  main/binary-all/Packages
+662708ffd45dbed023d22e80fb757707  main/binary-all/Packages.gz
+SHA1:
+e5da36e3aa0f1eb675731e0629c746b103580806  main/binary-all/Packages
+01cbfa0f01564073e6a5fd8d9388db9737639731  main/binary-all/Packages.gz
+SHA256:
+73277565661a7ac93952489a3b69e4d900c831a10ea562375a014789d35698f7  main/binary-all/Packages
+2b14ce01b19c7dea83cfb299d4aa9245501b34ddf3d192da1808e768a825644c  main/binary-all/Packages.gz

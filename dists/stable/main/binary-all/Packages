@@ -1,0 +1,18 @@
+Package: saltctl
+Version: 0.1.0
+Architecture: all
+Maintainer: Phillip Smith <fukawi2@gmail.com>
+Installed-Size: 83
+Depends: python3
+Filename: ../../../../pool/main/saltctl.deb
+Size: 22684
+MD5sum: 810604fb309b5d904d72a8bd60f68e83
+SHA1: 87df806c5ea0f25e8a504ddc7e62882fe26ea823
+SHA256: cc3e81f113bee6aeb4d1618fe6c3478d1074d5626d06c1ba7ecb26a989ffd2c4
+Section: default
+Priority: optional
+Homepage: https://github.com/fukawi2/saltctl
+Description: Interactive shell for managing Salt minions
+License: MIT
+Vendor: none
+

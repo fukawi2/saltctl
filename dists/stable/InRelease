@@ -1,0 +1,35 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: saltctl
+Label: saltctl
+Codename: stable
+Architectures: all
+Components: main
+Description: saltctl APT repository
+Date: Tue, 10 Feb 2026 02:28:44 +0000
+MD5Sum:
+7b84ce34d35d82b97e2ccd708347defa  main/binary-all/Packages
+662708ffd45dbed023d22e80fb757707  main/binary-all/Packages.gz
+SHA1:
+e5da36e3aa0f1eb675731e0629c746b103580806  main/binary-all/Packages
+01cbfa0f01564073e6a5fd8d9388db9737639731  main/binary-all/Packages.gz
+SHA256:
+73277565661a7ac93952489a3b69e4d900c831a10ea562375a014789d35698f7  main/binary-all/Packages
+2b14ce01b19c7dea83cfb299d4aa9245501b34ddf3d192da1808e768a825644c  main/binary-all/Packages.gz
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEE2erbhYixM4BrB8fjpKHci70XxvkFAmmKl9wACgkQpKHci70X
+xvk/WhAAlmXV/p1Vo6wO5hHYIxsyA7JseD7PaKoL4rkKAhANfjZtHjEr0ogs6oJ8
+FmQzjYkVPp13TPr3NYMc0hvCx6ebhQ7YEp8+c7sxnAMyO2jZ1E7vjJYMx4lGIZyf
+to3r4im17ZU6HEnwYOQzHv7ZXSMb7b3nYZf8V1LjaUrhaM/QLVCJSkgvLtvsO3Rd
+MGPp7iNMpo6kwmjXOWEFaqOLUfV+zOipc2IzeHfPi4aGkV7wEJ75tXZYCcYq0D9U
+do2W8ScVbnTWqvteeK73tg+D+Gdpsn6DxUDJiPBeyhuRQyKXmLys4NQTmXo9Hysi
+NIzCLqOtA6fq1So0bN/SvhYiVqCIRHNYPZF0x2d6FGE+JPBXLYgtfiyMA9HyU9bd
+peno5Ube++w2fHGzj27z2/CvLrV80ZSduzUEUg/0OYRKh0qwUgby58q9YZLPvjYy
+PbpMb5xnshu52CjcmWrJuoHKbGY0gIEWb83mzDN1D96H3bXm+2m6zKWmBikX5ZoT
+bnJlG+X5QSbj1We7P/wopyE4w53MjLo5zjQA1HMIWNRQZQ+DebsFyy2wgzDg7Tg1
+TkDgSM1KEMXzMd1ChvSfkp96o9V34tLFx9PUeml0RAABk5L1J2mGJA3T3u5ecJ6a
+v9s/jjJ2psV7h+u2DgtjMRUnb1M21C04nZ+KeWV/7ZiN7hKu6as=
+=amDX
+-----END PGP SIGNATURE-----
