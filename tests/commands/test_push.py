@@ -1,6 +1,7 @@
 """Tests for push command"""
 
 import pytest
+from unittest.mock import Mock, patch
 from commands.push import PushCommand
 
 
@@ -77,6 +78,85 @@ def test_push_builds_correct_command(mock_shell, mock_subprocess):
     assert '--list' in executed_cmd
     assert 'host1,host2' in executed_cmd
     assert 'state.test' in executed_cmd
+
+
+def test_push_error_uses_pager(mock_shell, mock_subprocess):
+    """Test that push displays errors through pager"""
+    cmd = PushCommand()
+    mock_shell.selected_hosts = ['host1']
+    mock_shell.last_command_id = 1
+
+    # Mock failed command
+    mock_result = Mock()
+    mock_result.returncode = 1
+    mock_result.stdout = "Error output from salt"
+    mock_result.stderr = "Additional error info"
+    mock_subprocess.return_value = mock_result
+
+    with patch.object(cmd, '_display_with_pager') as mock_display:
+        with patch('shutil.get_terminal_size') as mock_terminal:
+            mock_terminal.return_value = Mock(columns=80)
+
+            cmd.execute(mock_shell, 'test')
+
+            # Verify pager was called
+            mock_display.assert_called_once()
+
+            # Verify content includes error information
+            content = mock_display.call_args[0][0]
+            assert 'Errors detected' in content
+            assert 'Return code: 1' in content
+            assert 'Error output from salt' in content
+            assert 'Additional error info' in content
+            assert '=' * 80 in content
+
+
+def test_push_error_respects_terminal_width(mock_shell, mock_subprocess):
+    """Test that error output separator respects terminal width"""
+    cmd = PushCommand()
+    mock_shell.selected_hosts = ['host1']
+    mock_shell.last_command_id = 1
+
+    # Mock failed command
+    mock_result = Mock()
+    mock_result.returncode = 2
+    mock_result.stdout = "Error"
+    mock_result.stderr = ""
+    mock_subprocess.return_value = mock_result
+
+    with patch.object(cmd, '_display_with_pager') as mock_display:
+        with patch('shutil.get_terminal_size') as mock_terminal:
+            mock_terminal.return_value = Mock(columns=120)
+
+            cmd.execute(mock_shell, 'test')
+
+            content = mock_display.call_args[0][0]
+            # Should have separator of length 120
+            assert '=' * 120 in content
+
+
+def test_push_success_no_pager(mock_shell, mock_subprocess, capsys):
+    """Test that successful push doesn't use pager"""
+    cmd = PushCommand()
+    mock_shell.selected_hosts = ['host1']
+    mock_shell.last_command_id = 1
+
+    # Mock successful command
+    mock_result = Mock()
+    mock_result.returncode = 0
+    mock_result.stdout = "Success output"
+    mock_result.stderr = ""
+    mock_subprocess.return_value = mock_result
+
+    with patch.object(cmd, '_display_with_pager') as mock_display:
+        cmd.execute(mock_shell, 'test')
+
+        # Verify pager was NOT called
+        mock_display.assert_not_called()
+
+        # Verify success message was printed
+        captured = capsys.readouterr()
+        assert "Command completed successfully" in captured.out
 
 
 # vim: set ts=4 sw=4 et:

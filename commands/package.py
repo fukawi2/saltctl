@@ -72,10 +72,12 @@ Examples:
 
             # Display output
             if result.returncode != 0:
-                print("Errors detected:")
-                print(output)
+                content = f"Errors detected:\n{output}"
             else:
-                print(output)
+                content = output
+
+            self._display_with_pager(content)
+
         except FileNotFoundError:
             print("Error: salt command not found. Is Salt installed?")
         except Exception as e:

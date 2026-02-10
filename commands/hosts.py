@@ -21,10 +21,14 @@ Usage: hosts"""
 
     def execute(self, shell, args: str) -> bool:
         if shell.all_minions:
-            print(f"Available minions ({len(shell.all_minions)}):")
+            # Build output
+            lines = [f"Available minions ({len(shell.all_minions)}):"]
             for minion in shell.all_minions:
                 marker = " *" if minion in shell.selected_hosts else ""
-                print(f"  {minion}{marker}")
+                lines.append(f"  {minion}{marker}")
+
+            content = '\n'.join(lines)
+            self._display_with_pager(content)
         else:
             print("No minions found.")
 
