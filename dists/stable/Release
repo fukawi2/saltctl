@@ -1,16 +1,28 @@
 Origin: saltctl
 Label: saltctl
 Codename: stable
-Architectures: all
+Architectures: all amd64 arm64
 Components: main
 Description: saltctl APT repository
-Date: Tue, 10 Feb 2026 02:52:59 +0000
+Date: Tue, 10 Feb 2026 03:11:10 +0000
 MD5Sum:
-b8048695fa82629bbb557a144cc5cf6d  main/binary-all/Packages
-e469082ac4e3396054b55aedde410b22  main/binary-all/Packages.gz
+20a265c324aef3f4e7efb93648359e43  main/binary-amd64/Packages
+56817bd2a6e6565f03a348a1b13ab594  main/binary-amd64/Packages.gz
+20a265c324aef3f4e7efb93648359e43  main/binary-all/Packages
+56817bd2a6e6565f03a348a1b13ab594  main/binary-all/Packages.gz
+20a265c324aef3f4e7efb93648359e43  main/binary-arm64/Packages
+56817bd2a6e6565f03a348a1b13ab594  main/binary-arm64/Packages.gz
 SHA1:
-1ecd7d0aa06e8e0641b89d585d21ffd99f06d77d  main/binary-all/Packages
-4257bf3afcfbd7f3b0932e4d236f9a818e5cec64  main/binary-all/Packages.gz
+f0c618bdf596b7e2f884408617288825e6a954e1  main/binary-amd64/Packages
+9e02852cb6dfdcbdc5ce4669ad5c1eb521de6189  main/binary-amd64/Packages.gz
+f0c618bdf596b7e2f884408617288825e6a954e1  main/binary-all/Packages
+9e02852cb6dfdcbdc5ce4669ad5c1eb521de6189  main/binary-all/Packages.gz
+f0c618bdf596b7e2f884408617288825e6a954e1  main/binary-arm64/Packages
+9e02852cb6dfdcbdc5ce4669ad5c1eb521de6189  main/binary-arm64/Packages.gz
 SHA256:
-3a9de073317c7dd17ed2a70b2a14ff45b89722a34b5f2264f32f7d4cbd47068a  main/binary-all/Packages
-af610369b81ac529d49a3db2191d46183da3dcfaa91909e48abbd9cdc62a25b1  main/binary-all/Packages.gz
+08b69f26efacf75154dc95e1e9e2bf00df8a3e873a9d74d9784ce309dbaf5db4  main/binary-amd64/Packages
+7ed8a1359b4e70df87a0bf3a9db7d633fa7df87c8548b1166f06936d12fbd497  main/binary-amd64/Packages.gz
+08b69f26efacf75154dc95e1e9e2bf00df8a3e873a9d74d9784ce309dbaf5db4  main/binary-all/Packages
+7ed8a1359b4e70df87a0bf3a9db7d633fa7df87c8548b1166f06936d12fbd497  main/binary-all/Packages.gz
+08b69f26efacf75154dc95e1e9e2bf00df8a3e873a9d74d9784ce309dbaf5db4  main/binary-arm64/Packages
+7ed8a1359b4e70df87a0bf3a9db7d633fa7df87c8548b1166f06936d12fbd497  main/binary-arm64/Packages.gz

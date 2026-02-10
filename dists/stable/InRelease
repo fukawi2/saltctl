@@ -4,32 +4,44 @@ Hash: SHA512
 Origin: saltctl
 Label: saltctl
 Codename: stable
-Architectures: all
+Architectures: all amd64 arm64
 Components: main
 Description: saltctl APT repository
-Date: Tue, 10 Feb 2026 02:52:59 +0000
+Date: Tue, 10 Feb 2026 03:11:10 +0000
 MD5Sum:
-b8048695fa82629bbb557a144cc5cf6d  main/binary-all/Packages
-e469082ac4e3396054b55aedde410b22  main/binary-all/Packages.gz
+20a265c324aef3f4e7efb93648359e43  main/binary-amd64/Packages
+56817bd2a6e6565f03a348a1b13ab594  main/binary-amd64/Packages.gz
+20a265c324aef3f4e7efb93648359e43  main/binary-all/Packages
+56817bd2a6e6565f03a348a1b13ab594  main/binary-all/Packages.gz
+20a265c324aef3f4e7efb93648359e43  main/binary-arm64/Packages
+56817bd2a6e6565f03a348a1b13ab594  main/binary-arm64/Packages.gz
 SHA1:
-1ecd7d0aa06e8e0641b89d585d21ffd99f06d77d  main/binary-all/Packages
-4257bf3afcfbd7f3b0932e4d236f9a818e5cec64  main/binary-all/Packages.gz
+f0c618bdf596b7e2f884408617288825e6a954e1  main/binary-amd64/Packages
+9e02852cb6dfdcbdc5ce4669ad5c1eb521de6189  main/binary-amd64/Packages.gz
+f0c618bdf596b7e2f884408617288825e6a954e1  main/binary-all/Packages
+9e02852cb6dfdcbdc5ce4669ad5c1eb521de6189  main/binary-all/Packages.gz
+f0c618bdf596b7e2f884408617288825e6a954e1  main/binary-arm64/Packages
+9e02852cb6dfdcbdc5ce4669ad5c1eb521de6189  main/binary-arm64/Packages.gz
 SHA256:
-3a9de073317c7dd17ed2a70b2a14ff45b89722a34b5f2264f32f7d4cbd47068a  main/binary-all/Packages
-af610369b81ac529d49a3db2191d46183da3dcfaa91909e48abbd9cdc62a25b1  main/binary-all/Packages.gz
+08b69f26efacf75154dc95e1e9e2bf00df8a3e873a9d74d9784ce309dbaf5db4  main/binary-amd64/Packages
+7ed8a1359b4e70df87a0bf3a9db7d633fa7df87c8548b1166f06936d12fbd497  main/binary-amd64/Packages.gz
+08b69f26efacf75154dc95e1e9e2bf00df8a3e873a9d74d9784ce309dbaf5db4  main/binary-all/Packages
+7ed8a1359b4e70df87a0bf3a9db7d633fa7df87c8548b1166f06936d12fbd497  main/binary-all/Packages.gz
+08b69f26efacf75154dc95e1e9e2bf00df8a3e873a9d74d9784ce309dbaf5db4  main/binary-arm64/Packages
+7ed8a1359b4e70df87a0bf3a9db7d633fa7df87c8548b1166f06936d12fbd497  main/binary-arm64/Packages.gz
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEE2erbhYixM4BrB8fjpKHci70XxvkFAmmKnYsACgkQpKHci70X
-xvkr0xAAqXoUMCmJ69drfxRcL/GhPXZxmcDyeLyogB2SVJRKhkpkKqUSBJIAp/SC
-C9g9gXHc66lTTaXAkCRs7YZ4+f+bO3FMUGzdsg86PS1X8BkZ0EsJ+27wFbcG8SDx
-mk30BGo1PEO0q8ywWscisGtjUS7Vh+gjhTF+9vc+YNuMDm07S4ZG5BfHHV7gl3Ow
-SzTql5P0CsTp5gca3tZDSNO8FDYscuB5ZhzX1GARFo9rTEEaoKvlEFKTllV6vbrt
-zFfuE5b4WQ/+xAynKV9ZnStWOrCv/qmHQtXbtjMyeYBnu+PeEDfVc6N/EExO8JxA
-h8IJnDz6Q1+pC+hVY9oM2HQnyRtZcNq3+RDdonIKa77FaTAIeKXVUWK0E2hQzajj
-naey8jszNCI3gbjRKBWckMMfW5+cf3TkHJBOxQKhpug7rDBw37IWUCEFQsJf6qMW
-eLqvQ+vSAP7dTGYqUp/E5eEC+t3mxiIeSINZchpUlldhV0jCdJBH07HTyHluVzGy
-L+AipRVjP2KSMYrspTQS3hwrHysF1Q7zNCdOLcijDXSK7IRJpV6jh0auMXwTTjVt
-zaxPV/cth+FzpdhmQsnr4gz0zAGcKQNpK/V5dfLiMnTsnQEJzwNPuiFeC/6FZevW
-vbiECOPMP1e9F2wYOiBZD3h/98sSru/9oYF4x6yVUNGBB2GdzyI=
-=e0nf
+iQIzBAEBCgAdFiEE2erbhYixM4BrB8fjpKHci70XxvkFAmmKoc4ACgkQpKHci70X
+xvnXARAA6N9w2AA6GL8wJCjOFnDYZvW72aO967R7iHzKTLzeKJLDdq++feuoLcWI
+NCkoVUK+O3qJCGjWr5TKCQ3EpjZtgJVBJRZoYIQqLVHNT5fVljPoadlEQjLl/nzu
+DnB1E/TPBD0o53ojHyrPkKYwuodogit+ohBg6XzfAMmya0KijDVBwCDkLwFOJuEZ
+KQmFBBs/jZMVORuKMLlA7YSW3hF5v1AsA435bjZLbt7IhBXx3TAqBjb6FGo80t+0
+unbpg/jDxyP91aHOmsPMKILdTfwqkV2BvHfWaY1b1I/44oYAqwIlM2OXPK/i7f2R
+ucC5HQXOPxNkA8WtSiiRdsXQWxbbbBR9BECHrWWG5eyVOf9TF/UxArt1ooQ3YjjP
+j5fhmJ1FUtD5XjxNTunVITMoI5293OeAwzPQopov8BV8qBTaRIghv/Tn9qPjab1s
+3nEqdjTgBLlQFvzH447gd+6SqB+yN98LhaRn+uat3yePAxafmddpgFFWvRw1OGvC
+h7jAaaQnDhgU8tRgQhzxkFjE1M0EymoiUOCeU85r8Cl6CiiM79CnGCaWXbm1WZU4
+M4BlCvvJHShNy/3qIHBt08ivPItawr1WYhR4AxnlsSvxt8/ITEFHPIdoCRjEYvay
+mhTxQtSaBZxdk/luYOGLnE/X4ByLuq648xPviXcDCw7MgcdxlWc=
+=7a/Z
 -----END PGP SIGNATURE-----
