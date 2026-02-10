@@ -105,6 +105,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Publish to APT repository on GitHub Pages
+      - name: Save .deb package
+        run: |
+          cp *.deb /tmp/saltctl.deb
+          ls -lh /tmp/saltctl.deb
+
       - name: Import GPG key
         run: |
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
@@ -128,7 +133,7 @@ jobs:
 
       - name: Copy .deb package to repository
         run: |
-          cp "${{ github.workspace }}/../*.deb" pool/main/ || cp *.deb pool/main/
+          cp /tmp/saltctl.deb pool/main/
 
       - name: Generate Packages file
         run: |
