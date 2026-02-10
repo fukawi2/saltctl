@@ -1,5 +1,8 @@
 """Output command - show output from executed commands"""
 
+import os
+import shutil
+import subprocess
 from .base import BaseCommand
 
 
@@ -20,6 +23,40 @@ Usage: output [command_id]
     @property
     def log_in_history(self) -> bool:
         return False
+
+    def _display_with_pager(self, content: str) -> None:
+        """Display content through a pager if available"""
+        # Check for SALTCTL_PAGER first, then fall back to PAGER
+        pager = os.environ.get('SALTCTL_PAGER')
+        if pager is None:
+            pager = os.environ.get('PAGER')
+
+        # If either is explicitly set to empty string, skip paging
+        if pager == '':
+            print(content)
+            return
+
+        # Use pager if set, otherwise default to 'less -RFX'
+        # -R: preserve ANSI color codes
+        # -F: exit if content fits on one screen
+        # -X: don't clear screen on exit
+        if pager is None:
+            pager = 'less -RFX'
+
+        try:
+            # Try to pipe content through pager
+            process = subprocess.Popen(
+                pager,
+                shell=True,
+                stdin=subprocess.PIPE,
+                stdout=None,  # Use parent's stdout
+                stderr=None   # Use parent's stderr
+            )
+            process.communicate(input=content.encode('utf-8'))
+            process.wait()
+        except (OSError, subprocess.SubprocessError):
+            # If pager fails, fall back to regular print
+            print(content)
 
     def execute(self, shell, args: str) -> bool:
         command_id = None
@@ -56,14 +93,22 @@ Usage: output [command_id]
 
         salt_command, output, return_code = output_row
 
-        # Display the command and output
-        print(f"Command ID: {command_id}")
-        print(f"Command: {command}")
-        print(f"Timestamp: {timestamp}")
-        print(f"Return code: {return_code}")
-        print(f"\n{'='*80}")
-        print(output)
-        print(f"{'='*80}")
+        # Get terminal width for separator line
+        terminal_width = shutil.get_terminal_size(fallback=(80, 24)).columns
+
+        # Build the complete output
+        content = f"""Command ID: {command_id}
+Command: {command}
+Timestamp: {timestamp}
+Return code: {return_code}
+
+{'='*terminal_width}
+{output}
+{'='*terminal_width}
+"""
+
+        # Display through pager
+        self._display_with_pager(content)
 
         return False
 

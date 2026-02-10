@@ -115,6 +115,35 @@ The shell maintains persistent command history in `~/.saltctl_history` with read
 - Ctrl-R for reverse history search
 - Tab completion for command names
 
+## Output Paging
+
+The `output` command automatically pages long output through a pager for easier viewing.
+
+### Pager Configuration
+
+Control paging behavior using environment variables:
+
+- **SALTCTL_PAGER** - Application-specific pager (takes precedence)
+- **PAGER** - System-wide pager setting (used if `SALTCTL_PAGER` not set)
+- **Default** - Uses `less -RFX` if neither variable is set
+  - `-R`: Preserve ANSI color codes
+  - `-F`: Exit automatically if content fits on one screen
+  - `-X`: Don't clear screen on exit
+
+### Disabling Paging
+
+To disable paging completely:
+
+```bash
+export SALTCTL_PAGER=""
+```
+
+Or for a single execution:
+
+```bash
+SALTCTL_PAGER="" saltctl
+```
+
 ## Development
 
 ### Running Tests
