@@ -167,13 +167,27 @@ jobs:
           Date: $(date -Ru)
           EOF
 
-          # Add checksums
+          # Add checksums with file sizes (required format: <hash> <size> <filename>)
           echo "MD5Sum:" >> Release
-          find main -type f -exec md5sum {} \; | sed 's|main|main|' >> Release
+          find main -type f | while read file; do
+            hash=$(md5sum "$file" | cut -d' ' -f1)
+            size=$(stat -c%s "$file")
+            printf " %s %7s %s\n" "$hash" "$size" "$file"
+          done >> Release
+
           echo "SHA1:" >> Release
-          find main -type f -exec sha1sum {} \; | sed 's|main|main|' >> Release
+          find main -type f | while read file; do
+            hash=$(sha1sum "$file" | cut -d' ' -f1)
+            size=$(stat -c%s "$file")
+            printf " %s %7s %s\n" "$hash" "$size" "$file"
+          done >> Release
+
           echo "SHA256:" >> Release
-          find main -type f -exec sha256sum {} \; | sed 's|main|main|' >> Release
+          find main -type f | while read file; do
+            hash=$(sha256sum "$file" | cut -d' ' -f1)
+            size=$(stat -c%s "$file")
+            printf " %s %7s %s\n" "$hash" "$size" "$file"
+          done >> Release
 
       - name: Sign Release file
         run: |
