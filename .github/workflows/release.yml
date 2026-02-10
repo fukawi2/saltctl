@@ -137,9 +137,8 @@ jobs:
 
       - name: Generate Packages file
         run: |
-          cd dists/stable/main/binary-all
-          dpkg-scanpackages --multiversion ../../../../pool/main > Packages
-          gzip --keep --force Packages
+          dpkg-scanpackages --multiversion pool/main > dists/stable/main/binary-all/Packages
+          gzip --keep --force dists/stable/main/binary-all/Packages
 
       - name: Generate Release file
         run: |
