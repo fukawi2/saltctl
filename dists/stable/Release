@@ -4,13 +4,13 @@ Codename: stable
 Architectures: all
 Components: main
 Description: saltctl APT repository
-Date: Tue, 10 Feb 2026 02:28:44 +0000
+Date: Tue, 10 Feb 2026 02:52:59 +0000
 MD5Sum:
-7b84ce34d35d82b97e2ccd708347defa  main/binary-all/Packages
-662708ffd45dbed023d22e80fb757707  main/binary-all/Packages.gz
+b8048695fa82629bbb557a144cc5cf6d  main/binary-all/Packages
+e469082ac4e3396054b55aedde410b22  main/binary-all/Packages.gz
 SHA1:
-e5da36e3aa0f1eb675731e0629c746b103580806  main/binary-all/Packages
-01cbfa0f01564073e6a5fd8d9388db9737639731  main/binary-all/Packages.gz
+1ecd7d0aa06e8e0641b89d585d21ffd99f06d77d  main/binary-all/Packages
+4257bf3afcfbd7f3b0932e4d236f9a818e5cec64  main/binary-all/Packages.gz
 SHA256:
-73277565661a7ac93952489a3b69e4d900c831a10ea562375a014789d35698f7  main/binary-all/Packages
-2b14ce01b19c7dea83cfb299d4aa9245501b34ddf3d192da1808e768a825644c  main/binary-all/Packages.gz
+3a9de073317c7dd17ed2a70b2a14ff45b89722a34b5f2264f32f7d4cbd47068a  main/binary-all/Packages
+af610369b81ac529d49a3db2191d46183da3dcfaa91909e48abbd9cdc62a25b1  main/binary-all/Packages.gz
