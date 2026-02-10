@@ -117,11 +117,13 @@ jobs:
 
       - name: Checkout gh-pages branch
         run: |
-          git fetch origin gh-pages || true
-          git checkout gh-pages 2>/dev/null || git checkout -b gh-pages origin/gh-pages 2>/dev/null || git checkout --orphan gh-pages
-
-          # Clean working directory if this is a new orphan branch
-          if [ -z "$(git log --oneline -1 2>/dev/null)" ]; then
+          git fetch origin
+          if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+            # Remote branch exists - check it out
+            git checkout -B gh-pages origin/gh-pages
+          else
+            # Remote branch doesn't exist - create new orphan branch
+            git checkout --orphan gh-pages
             git rm -rf . 2>/dev/null || true
             rm -rf * .gitignore .github 2>/dev/null || true
           fi
