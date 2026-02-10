@@ -115,10 +115,10 @@ jobs:
           echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
           gpg --list-secret-keys
 
-      - name: Checkout gh-pages-test branch
+      - name: Checkout gh-pages branch
         run: |
-          git fetch origin gh-pages-test || true
-          git checkout gh-pages-test 2>/dev/null || git checkout --orphan gh-pages-test
+          git fetch origin gh-pages || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
 
           # Clean working directory if this is a new orphan branch
           if [ -z "$(git log --oneline -1 2>/dev/null)" ]; then
@@ -172,12 +172,12 @@ jobs:
         run: |
           gpg --armor --export > pubkey.gpg
 
-      - name: Commit and push to gh-pages-test
+      - name: Commit and push to gh-pages
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add pool/ dists/ pubkey.gpg
           git commit -m "Update APT repository for ${{ github.ref_name }}" || echo "No changes to commit"
-          git push origin gh-pages-test
+          git push origin gh-pages
 
 # vim: set ts=2 sw=2 et:
