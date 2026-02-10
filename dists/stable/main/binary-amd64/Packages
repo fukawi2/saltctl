@@ -1,14 +1,14 @@
 Package: saltctl
-Version: 0.1.5
+Version: 0.1.6
 Architecture: all
 Maintainer: Phillip Smith <fukawi2@gmail.com>
 Installed-Size: 83
 Depends: python3
 Filename: pool/main/saltctl.deb
-Size: 22488
-MD5sum: a55f916412a2d90db11b05e4508a1bed
-SHA1: 421779fc8f52268fef3156f8ea5235419a9314c7
-SHA256: b64b38432b7b5fdbe4a78598a93528c789f915d2a893da49af371898b8ea66c2
+Size: 22686
+MD5sum: f36d19d152d27169e1380c97f7f10455
+SHA1: 3abf9d1df7788d206a7da5990b826063bdd5a646
+SHA256: a87405686a9622c17771b764fff17aa0468a365fe0cccff44a792b3bc94f793f
 Section: default
 Priority: optional
 Homepage: https://github.com/fukawi2/saltctl
