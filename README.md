@@ -61,7 +61,25 @@ trim_days = 90
 
 ## Installation
 
-### From .deb Package (Recommended)
+### From APT Repository (Recommended)
+
+Add the saltctl APT repository for easy installation and automatic updates:
+
+```bash
+# Add the GPG key
+curl -fsSL https://fukawi2.github.io/saltctl/pubkey.gpg | sudo gpg --dearmor -o /usr/share/keyrings/saltctl-archive-keyring.gpg
+
+# Add the repository
+echo "deb [signed-by=/usr/share/keyrings/saltctl-archive-keyring.gpg] https://fukawi2.github.io/saltctl stable main" | sudo tee /etc/apt/sources.list.d/saltctl.list
+
+# Update and install
+sudo apt update
+sudo apt install saltctl
+```
+
+The `saltctl` command will be available system-wide and will receive updates through `apt upgrade`.
+
+### From .deb Package
 
 Download the latest `.deb` package from the [Releases](https://github.com/fukawi2/saltctl/releases) page and install:
 

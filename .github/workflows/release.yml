@@ -104,4 +104,80 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Publish to APT repository on GitHub Pages
+      - name: Save .deb package
+        run: |
+          cp *.deb /tmp/saltctl.deb
+          ls -lh /tmp/saltctl.deb
+
+      - name: Import GPG key
+        run: |
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
+          gpg --list-secret-keys
+
+      - name: Checkout gh-pages branch
+        run: |
+          git fetch origin gh-pages || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+
+          # Clean working directory if this is a new orphan branch
+          if [ -z "$(git log --oneline -1 2>/dev/null)" ]; then
+            git rm -rf . 2>/dev/null || true
+            rm -rf * .gitignore .github 2>/dev/null || true
+          fi
+
+      - name: Setup APT repository structure
+        run: |
+          mkdir -p pool/main
+          mkdir -p dists/stable/main/binary-all
+
+      - name: Copy .deb package to repository
+        run: |
+          cp /tmp/saltctl.deb pool/main/
+
+      - name: Generate Packages file
+        run: |
+          cd dists/stable/main/binary-all
+          dpkg-scanpackages --multiversion ../../../../pool/main > Packages
+          gzip --keep --force Packages
+
+      - name: Generate Release file
+        run: |
+          cd dists/stable
+          cat > Release <<EOF
+          Origin: saltctl
+          Label: saltctl
+          Codename: stable
+          Architectures: all
+          Components: main
+          Description: saltctl APT repository
+          Date: $(date -Ru)
+          EOF
+
+          # Add checksums
+          echo "MD5Sum:" >> Release
+          find main -type f -exec md5sum {} \; | sed 's|main|main|' >> Release
+          echo "SHA1:" >> Release
+          find main -type f -exec sha1sum {} \; | sed 's|main|main|' >> Release
+          echo "SHA256:" >> Release
+          find main -type f -exec sha256sum {} \; | sed 's|main|main|' >> Release
+
+      - name: Sign Release file
+        run: |
+          cd dists/stable
+          gpg --batch --yes --detach-sign --armor --output Release.gpg Release
+          gpg --batch --yes --clearsign --output InRelease Release
+
+      - name: Export public GPG key
+        run: |
+          gpg --armor --export > pubkey.gpg
+
+      - name: Commit and push to gh-pages
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add pool/ dists/ pubkey.gpg
+          git commit -m "Update APT repository for ${{ github.ref_name }}" || echo "No changes to commit"
+          git push origin gh-pages
+
 # vim: set ts=2 sw=2 et:
